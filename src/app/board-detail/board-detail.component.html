@@ -1,0 +1,27 @@
+<h1>{{ text }}</h1>
+
+<div style="padding: 13px;">
+  <mat-spinner *ngIf="board.id === ''"></mat-spinner>
+  <mat-card *ngIf="board.id !== ''"  style="margin-top:10px;">
+    <mat-card-header>
+      <mat-card-title>{{board.title}} | {{board.id}}</mat-card-title>
+      <mat-card-subtitle>작성자 id: {{board.username}} | 조회수 : {{board.views}}
+      </mat-card-subtitle>
+      <mat-card-subtitle>작성일: {{board.created}}  수정일: {{board.updated}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{board.content}}
+      </p>
+      <!--<img *ngIf="board.files !== null " style="height:100%; width: 100%;" src="{{ board.files }}" />-->
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button routerLink="/board-create" routerLinkActive="active">글쓰기</button>
+      <button mat-button value="Submit" routerLink="/board-update/{{board.id}}">수정하기</button>
+      <button mat-button value="Submit" (click)="onDelete()">삭제하기</button>
+      <button mat-button routerLink="/board-list" routerLinkActive="active">목록보기</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

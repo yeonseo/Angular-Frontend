@@ -1,0 +1,38 @@
+<h1>{{ text }}</h1>
+
+<div style="padding: 13px;">
+  <form #f="ngForm">
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+          <mat-label>제목</mat-label>
+          <input matInput name="title" ngModel #first="ngModel">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+          <mat-label>작성자</mat-label>
+          <input matInput name="username" ngModel >
+        </mat-form-field>
+        <br>
+        <!--<mat-form-field appearance="fill">-->
+        <!--<mat-label>Select</mat-label>-->
+        <!--<mat-select>-->
+        <!--<mat-option value="option">Option</mat-option>-->
+        <!--</mat-select>-->
+        <!--</mat-form-field>-->
+        <!--<br>-->
+        <mat-form-field appearance="fill">
+          <mat-label>내용</mat-label>
+          <textarea matInput name="content" ngModel></textarea>
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button value="Submit" (click)="onSubmit(f)">작성하기</button>
+        <button mat-button routerLink="/board-list" routerLinkActive="active">목록보기</button>
+        <button mat-button (click)="onClickMe(f)">Click me!</button><br>
+        {{clickMessage}}
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

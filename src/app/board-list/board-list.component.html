@@ -1,0 +1,33 @@
+<h1>{{ text }}</h1>
+<!--<ul class="boards">-->
+  <!--<li *ngFor="let board of boards"-->
+      <!--[class.selected]="board === selectedBoard"-->
+      <!--(click)="onSelect(board)"><a routerLink="/board-detail/{{board.id}}">{{ board.title }} | {{ board.username }} {{ board.created }}  {{ board.views }}</a>-->
+  <!--</li>-->
+<!--</ul>-->
+
+<div style="padding: 13px;">
+  <mat-spinner *ngIf="datas.length === 0"></mat-spinner>
+  <mat-card *ngFor="let board of datas" [class.selected]="board === selectedBoard"
+            (click)="onSelect(board)" style="margin-top:10px;">
+    <mat-card-header>
+      <mat-card-title>{{board.id}}</mat-card-title>
+      <mat-card-subtitle>{{board.title}} / {{board.username}}
+      </mat-card-subtitle>
+      <mat-card-subtitle>{{board.created}} / {{board.updated}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{board.content}}
+      </p>
+      <img *ngIf="board.files !== null " style="height:100%; width: 100%;" src="{{ board.files }}" />
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button> 상세 보기 <a routerLink="/board-detail/{{board.id}}">{{ board.title }} | {{ board.username }} {{ board.created }}  {{ board.views }}</a></button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card-actions>
+    <button mat-button routerLink="/board-create" routerLinkActive="active">글쓰기</button>
+  </mat-card-actions>
+</div>

@@ -1,0 +1,35 @@
+// import { Board } from './board';
+//
+// export const BOARDS: Board[] = [
+//   { id: 1,
+//     boardTitle: '첫 게시물',
+//     boardName: '얀버그',
+//     boardDay: '2020. 05. 11',
+//     boardViews: 10,
+//     boardContext: '오늘 저녁에는 보라매공원을 걸을 꺼야. 내일은 헬스장에 가야한다.' },
+//   { id: 2,
+//     boardTitle: '게시물 테스트',
+//     boardName: '얀버그',
+//     boardDay: '2020. 05. 12',
+//     boardViews: 40,
+//     boardContext: '오늘 저녁에는 보라매공원을 걸을 꺼야. 내일은 헬스장에 가야한다.' },
+//   { id: 3,
+//     boardTitle: '배고프다',
+//     boardName: '얀버그',
+//     boardDay: '2020. 05. 13',
+//     boardViews: 60,
+//     boardContext: '오늘 저녁에는 보라매공원을 걸을 꺼야. 내일은 헬스장에 가야한다.' },
+//   { id: 4,
+//     boardTitle: '안녕하세요',
+//     boardName: '얀버그',
+//     boardDay: '2020. 05. 14',
+//     boardViews: 80,
+//     boardContext: '오늘 저녁에는 보라매공원을 걸을 꺼야. 내일은 헬스장에 가야한다.' },
+//   { id: 5,
+//     boardTitle: '마지막 게시물',
+//     boardName: '얀버그',
+//     boardDay: '2020. 05. 15',
+//     boardViews: 100,
+//     boardContext: '오늘 저녁에는 보라매공원을 걸을 꺼야. 내일은 헬스장에 가야한다.' }
+//
+// ];
