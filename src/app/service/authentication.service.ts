@@ -20,9 +20,9 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(username, email, password) {
+  login( body: object ) {
     const url = this.REST_API_SERVER + 'rest-auth/login/';
-    return this.httpClient.post<any>(url, { username, email, password })
+    return this.httpClient.post<any>(url, body )
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
