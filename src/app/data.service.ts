@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 })
 export class DataService {
 
-  private REST_API_SERVER = 'http://localhost:8000/';
+  private REST_API_SERVER = 'http://192.168.0.134:8000/';
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 

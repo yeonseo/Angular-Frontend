@@ -31,7 +31,7 @@ export class BoardListComponent implements OnInit {
      *  When data is received, we added it in the products array.
      */
     this.dataService.sendGetRequest('freeboards/').subscribe((data: any[]) => {
-      console.log(data);
+      // console.log(data);
       this.datas = data;
     });
   }

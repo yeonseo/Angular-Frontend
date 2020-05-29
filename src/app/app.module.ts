@@ -17,6 +17,10 @@ import { MaterialModule } from './modules/material/material.module';
 // for FlexLayout
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+// for User
+import { UserLoginComponent } from './user-login/user-login.component';
+import { UserJoinComponent } from './user-join/user-join.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +28,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BoardCreateComponent,
     BoardListComponent,
     BoardDetailComponent,
+    UserLoginComponent,
+    UserJoinComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +41,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule
   ],
   providers: [],
-  bootstrap: [AppComponent, BoardCreateComponent, BoardListComponent, BoardDetailComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
