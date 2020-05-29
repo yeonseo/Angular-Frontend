@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Board } from '../board';
 // import { BOARDS } from '../mock-boards';
 import {ActivatedRoute} from '@angular/router';
-import { DataService } from '../data.service';
+import { DataService } from '../service/data.service';
 import {_isNumberValue} from "@angular/cdk/coercion";
 import {formatNumber} from "@angular/common";
 import {compareNumbers, toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";

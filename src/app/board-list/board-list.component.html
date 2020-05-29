@@ -7,9 +7,12 @@
 <!--</ul>-->
 
 <div style="padding: 13px;">
-  <mat-card-actions>
-    <button mat-button routerLink="/board-create" routerLinkActive="active">글쓰기</button>
-  </mat-card-actions>
+  <mat-card>
+    <mat-card-actions>
+      <button mat-button routerLink="/board-create" routerLinkActive="active">글쓰기</button>
+    </mat-card-actions>
+  </mat-card>
+
   <mat-spinner *ngIf="datas.length === 0"></mat-spinner>
   <mat-card *ngFor="let board of datas" [class.selected]="board === selectedBoard"
             (click)="onSelect(board)" style="margin-top:10px;">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {DataService} from '../data.service';
+import {DataService} from '../service/data.service';
+import {AuthenticationService} from '../service/authentication.service';
 
 @Component({
   selector: 'app-user-login',
@@ -10,7 +11,7 @@ import {DataService} from '../data.service';
 export class UserLoginComponent implements OnInit {
   clickMessage = '';
 
-  constructor(private dataService: DataService,) { }
+  constructor(private authService: AuthenticationService, private dataService: DataService) { }
 
   ngOnInit(): void {
   }
@@ -21,11 +22,20 @@ export class UserLoginComponent implements OnInit {
   }
 
   onSubmit(f: NgForm): void{
-
+    this.authService.login(f.value).subscribe(
+      (val) => {
+        console.log('POST call successful value returned in body', val);
+      },
+      response => {
+        console.log('POST call in error', response);
+      },
+      () => {
+        console.log('The POST observable is now completed.');
+      }
+    );
 
     this.clickMessage = 'You are my hero!';
 
     this.dataService.goBoardList();
   }
-
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthenticationService} from '../authentication.service';
-import {DataService} from '../data.service';
+import {AuthenticationService} from '../service/authentication.service';
+import {DataService} from '../service/data.service';
 
 @Component({
   selector: 'app-user-join',

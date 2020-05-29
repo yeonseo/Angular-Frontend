@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from '../board';
 // import { BOARDS } from '../mock-boards';
-import { DataService } from '../data.service';
+import { DataService } from '../service/data.service';
+import {AuthenticationService} from '../service/authentication.service';
 
 @Component({
   selector: 'app-board-list',
@@ -14,7 +15,6 @@ export class BoardListComponent implements OnInit {
   text = 'YS board list View!!';
   datas = [];
   selectedBoard: Board;
-
   // boards = BOARDS;
   // boardTitle = '날씨가 매우 죠아용';
   // boardName = '얀버그';
@@ -39,4 +39,5 @@ export class BoardListComponent implements OnInit {
   onSelect(board: Board): void {
     this.selectedBoard = board;
   }
+
 }
