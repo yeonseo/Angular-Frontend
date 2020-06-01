@@ -33,6 +33,7 @@ export class BoardListComponent implements OnInit {
      */
     this.dataService.sendGetRequest('freeboards/').subscribe((data: any[]) => {
       this.datas = data;
+      console.log(data);
       this.dataSource = new MatTableDataSource<Board>(data);
       this.dataSource.paginator = this.paginator;
     });

@@ -6,12 +6,12 @@
       <mat-card-content>
         <mat-form-field appearance="fill">
           <mat-label>제목</mat-label>
-          <input matInput name="title" ngModel #first="ngModel">
+          <input matInput name="title" [(ngModel)]="board.title" #first="ngModel">
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
           <mat-label>작성자 (NUMBER)</mat-label>
-          <input matInput name="username" ngModel >
+          <input matInput name="username" [(ngModel)]="board.username" >
         </mat-form-field>
         <br>
         <!--<mat-form-field appearance="fill">-->
@@ -23,7 +23,7 @@
         <!--<br>-->
         <mat-form-field appearance="fill">
           <mat-label>내용</mat-label>
-          <textarea matInput name="content" ngModel></textarea>
+          <textarea matInput name="content" [(ngModel)]="board.content"></textarea>
         </mat-form-field>
       </mat-card-content>
 

@@ -1,19 +1,17 @@
-<h1>{{ text }}</h1>
-
-<div style="padding: 13px;">
+<div style="padding: 13px; width: 640px">
   <mat-spinner *ngIf="board.id === ''"></mat-spinner>
   <mat-card *ngIf="board.id !== ''"  style="margin-top:10px;">
     <mat-card-header>
-      <mat-card-title>{{board.title}} | {{board.id}}</mat-card-title>
-      <mat-card-subtitle>작성자 id: {{board.username}} | 조회수 : {{board.views}}
+      <mat-card-title>{{board.title}}</mat-card-title>
+      <mat-card-subtitle>작성자 pk: {{board.username}} | 조회수 : {{board.views}}
       </mat-card-subtitle>
-      <mat-card-subtitle>작성일: {{board.created | date:'yyyy년 MM월 dd일 HH:mm'}}  수정일: {{board.updated | date:'yyyy년 MM월 dd일 HH:mm'}}
+      <mat-card-subtitle>작성일: {{board.created | date:'yyyy/MM/dd HH:mm'}}  수정일: {{board.updated | date:'yyyy/MM/dd HH:mm'}}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <p>
-        {{board.content}}
-      </p>
+      <pre>
+{{board.content}}
+      </pre>
       <!--<img *ngIf="board.files !== null " style="height:100%; width: 100%;" src="{{ board.files }}" />-->
     </mat-card-content>
     <mat-card-actions>
