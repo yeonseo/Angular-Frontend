@@ -21,11 +21,11 @@ export class UserJoinComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
+    private authService: AuthenticationService,
     private dataService: DataService,
   ) {
     // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) {
+    if (this.authService.currentUserValue) {
       this.router.navigate(['/']);
     }
   }
@@ -39,9 +39,18 @@ export class UserJoinComponent implements OnInit {
   }
 
   onSubmit(f: NgForm): void{
-    this.clickMessage = 'You are my hero!';
-
-    this.dataService.goBoardList();
+    this.authService.join(f.value).subscribe(
+      (val) => {
+        console.log('POST call successful value returned in body', val);
+      },
+      response => {
+        console.log('POST call in error', response);
+      },
+      () => {
+        console.log('The POST observable is now completed.');
+        this.dataService.goBoardList();
+      }
+    );
   }
 
 }

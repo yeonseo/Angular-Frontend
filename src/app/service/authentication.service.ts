@@ -37,4 +37,10 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
     location.reload();
   }
+
+  join( body: object ) {
+    const url = this.REST_API_SERVER + 'rest-auth/registration/';
+    return this.httpClient.post(url, body).pipe(
+    );
+  }
 }
