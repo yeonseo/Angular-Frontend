@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, NgForm} from '@angular/forms';
+import { FormGroup, NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../service/authentication.service';
 import {DataService} from '../service/data.service';
@@ -19,7 +19,6 @@ export class UserJoinComponent implements OnInit {
   clickMessage = '';
 
   constructor(
-    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
@@ -40,8 +39,6 @@ export class UserJoinComponent implements OnInit {
   }
 
   onSubmit(f: NgForm): void{
-
-
     this.clickMessage = 'You are my hero!';
 
     this.dataService.goBoardList();

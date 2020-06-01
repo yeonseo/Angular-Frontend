@@ -34,8 +34,6 @@ export class UserLoginComponent implements OnInit {
       }
     );
 
-    this.clickMessage = 'You are my hero!';
-
     this.dataService.goBoardList();
   }
 }
