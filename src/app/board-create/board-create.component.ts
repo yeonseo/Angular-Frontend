@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 import { DataService } from '../service/data.service';
 import {Board} from '../board';
 import {NgForm} from '@angular/forms';
-import {isUndefined} from "util";
 
 @Component({
   selector: 'app-board-create',

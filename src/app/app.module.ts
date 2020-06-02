@@ -21,6 +21,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserJoinComponent } from './user-join/user-join.component';
 
+// for Interceptor
+import {RequestService} from './service/request.service';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HttpInterceptorService} from './service/http-interceptor.service';
+import { CommonComponent } from './common/common.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +37,7 @@ import { UserJoinComponent } from './user-join/user-join.component';
     BoardDetailComponent,
     UserLoginComponent,
     UserJoinComponent,
+    CommonComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +48,10 @@ import { UserJoinComponent } from './user-join/user-join.component';
     MaterialModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [
+    RequestService,
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

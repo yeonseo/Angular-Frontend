@@ -3,10 +3,7 @@ import { Board } from '../board';
 // import { BOARDS } from '../mock-boards';
 import {ActivatedRoute, Router} from '@angular/router';
 import { DataService } from '../service/data.service';
-import {_isNumberValue} from "@angular/cdk/coercion";
-import {formatNumber} from "@angular/common";
-import {compareNumbers, toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
-import {AuthenticationService} from "../service/authentication.service";
+import {AuthenticationService} from '../service/authentication.service';
 
 @Component({
   selector: 'app-board-detail',
@@ -85,7 +82,7 @@ export class BoardDetailComponent implements OnInit {
     } else if (this.authService.currentUserValue.user.pk === this.board.username) {
       this.router.navigateByUrl('/board-update/' + this.board.id);
     } else {
-      alert('수정권한이 없습니다')
+      alert('수정권한이 없습니다');
       this.router.navigateByUrl('/');
     }
   }
