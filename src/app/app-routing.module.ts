@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'board-list', component: BoardListComponent },
   { path: 'board-detail/:page-num', component: BoardDetailComponent },
   { path: 'login', component: UserLoginComponent },
-  { path: 'join', component: UserJoinComponent },
+  { path: 'join', component: UserJoinComponent, data: {routeName: 'login'} },
 ];
 
 @NgModule({
