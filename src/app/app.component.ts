@@ -9,16 +9,18 @@ import {AuthenticationService} from './service/authentication.service';
 export class AppComponent implements OnInit{
   title = 'my-view';
   userToken = '';
+  userName = '';
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit(){
     console.log(this.authService.currentUser);
-    if (this.authService.currentUser.hasOwnProperty('token') ){
-      this.authService.currentUser.subscribe((data: any) => {
+    this.authService.currentUser.subscribe((data: any) => {
+      if (data){
         this.userToken = data.token;
-      });
-    }
-    console.log('user token : ' + this.userToken);
+        this.userName = data.user.pk;
+      }
+    });
+    console.log(this.userName + ' : ' + this.userToken);
   }
 
   logout() {

@@ -31,11 +31,9 @@ export class UserLoginComponent implements OnInit {
       },
       () => {
         console.log('The POST observable is now completed.');
+        this.dataService.goBoardList();
       }
     );
 
-    this.clickMessage = 'You are my hero!';
-
-    this.dataService.goBoardList();
   }
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Board } from '../board';
 // import { BOARDS } from '../mock-boards';
 import { DataService } from '../service/data.service';
-import {AuthenticationService} from '../service/authentication.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-board-list',
@@ -15,12 +16,12 @@ export class BoardListComponent implements OnInit {
   text = 'YS board list View!!';
   datas = [];
   selectedBoard: Board;
-  // boards = BOARDS;
-  // boardTitle = '날씨가 매우 죠아용';
-  // boardName = '얀버그';
-  // boardDay = '2020. 05. 11';
-  // boardViews = '10';
-  // boardContexts = '오늘 저녁에는 보라매공원을 걸을 꺼야. 내일은 헬스장에 가야한다.';
+
+  displayedColumns: string[] = ['id', 'title', 'username', 'created', 'views'];
+  dataSource;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
@@ -31,8 +32,10 @@ export class BoardListComponent implements OnInit {
      *  When data is received, we added it in the products array.
      */
     this.dataService.sendGetRequest('freeboards/').subscribe((data: any[]) => {
-      // console.log(data);
       this.datas = data;
+      console.log(data);
+      this.dataSource = new MatTableDataSource<Board>(data);
+      this.dataSource.paginator = this.paginator;
     });
   }
 

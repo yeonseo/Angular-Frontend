@@ -1,0 +1,21 @@
+table {
+  width: 670px;
+}
+
+div.mat-elevation-z8 {
+  background-color: white;
+}
+
+th.mat-header-cell, tr {
+  text-align: center;
+}
+
+tr.mat-row:hover{
+  cursor: pointer;
+  background: #b4b4b433;
+}
+
+button.mat-button {
+  background-color: whitesmoke;
+  margin: 16px;
+}

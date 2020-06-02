@@ -14,7 +14,15 @@ import {isUndefined} from "util";
 export class BoardCreateComponent implements OnInit {
   text = 'YS board create View!!';
   clickMessage = '';
-  board: Board;
+  board: Board = {
+    id: '',
+    title: '',
+    username: '',
+    created: '',
+    updated: '',
+    views: 0,
+    content: '',
+  };
 
   private pageNum = -1;
 
@@ -41,17 +49,6 @@ export class BoardCreateComponent implements OnInit {
   }
 
   onSubmit(f: NgForm): void{
-    // this.board = {
-    //   id: '',
-    //   title: '',
-    //   username: '10',
-    //   created: '',
-    //   updated: '',
-    //   views: 10,
-    //   content: '새 키보드를 사용중입니다.',
-    // };
-    //
-    // const body = { username: this.board.username, title: this.board.title, content: this.board.content};
     let urlOption = '';
 
     if ( this.pageNum >= 0) {

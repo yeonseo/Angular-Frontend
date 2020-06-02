@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from '../board';
 // import { BOARDS } from '../mock-boards';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { DataService } from '../service/data.service';
 import {_isNumberValue} from "@angular/cdk/coercion";
 import {formatNumber} from "@angular/common";
 import {compareNumbers, toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
+import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
   selector: 'app-board-detail',
@@ -26,7 +27,10 @@ export class BoardDetailComponent implements OnInit {
   };
   // boards = BOARDS;
 
-  constructor(route: ActivatedRoute, private dataService: DataService) {
+  constructor(route: ActivatedRoute,
+              private router: Router,
+              private dataService: DataService,
+              private authService: AuthenticationService) {
     this.pageNum = route.snapshot.params['page-num'];
     // this.pageData = this.boards[this.pageNum];
   }
@@ -39,15 +43,9 @@ export class BoardDetailComponent implements OnInit {
      *  When data is received, we added it in the products array.
      */
     this.dataService.sendGetRequest('freeboards/' + this.pageNum).subscribe((data: any) => {
-      console.log(data);
       this.board = data;
-      console.log(this.board);
-      console.log(data['views']);
       this.board.views = this.board.views + 1;
-      console.log(this.board);
       this.onViewUpdate();
-      console.log(this.board.views);
-      console.log(this.board.views + 1);
     });
 
 
@@ -61,8 +59,6 @@ export class BoardDetailComponent implements OnInit {
         username: this.board.username,
         views: this.board.views})
       .subscribe((data: any) => {
-        console.log(data);
-        console.log(this.board);
       });
   }
 
@@ -80,6 +76,18 @@ export class BoardDetailComponent implements OnInit {
     );
     // 왜 subscribe()이 있어야 하지???
     this.dataService.goBoardList();
+  }
+
+  submitUserCheck(): void {
+    // redirect to home if already logged in
+    if (!this.authService.currentUserValue) {
+      this.router.navigateByUrl('/login');
+    } else if (this.authService.currentUserValue.user.pk === this.board.username) {
+      this.router.navigateByUrl('/board-update/' + this.board.id);
+    } else {
+      alert('수정권한이 없습니다')
+      this.router.navigateByUrl('/');
+    }
   }
 
 }
