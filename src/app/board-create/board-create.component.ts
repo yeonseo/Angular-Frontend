@@ -1,8 +1,10 @@
-import {Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, Injector, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import { DataService } from '../service/data.service';
 import {Board} from '../board';
 import {NgForm} from '@angular/forms';
+import {CommonComponent} from "../common/common.component";
+import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
   selector: 'app-board-create',
@@ -10,7 +12,7 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./board-create.component.css'],
 })
 
-export class BoardCreateComponent implements OnInit {
+export class BoardCreateComponent extends CommonComponent {
   text = 'YS board create View!!';
   clickMessage = '';
   board: Board = {
@@ -25,8 +27,13 @@ export class BoardCreateComponent implements OnInit {
 
   private pageNum = -1;
 
-  constructor(route: ActivatedRoute, private dataService: DataService) {
-    if (route.snapshot.params['page-num'] !== '' || route.snapshot.params['page-num'] !== null){
+  constructor(route: ActivatedRoute,
+              router: Router,
+              dataService: DataService,
+              authService: AuthenticationService,
+              appInjector: Injector) {
+    super(route, router, dataService, authService, appInjector);
+    if (route.snapshot.params['page-num'] !== '' || route.snapshot.params['page-num'] !== null) {
       this.pageNum = route.snapshot.params['page-num'];
     }
   }
@@ -47,7 +54,7 @@ export class BoardCreateComponent implements OnInit {
     console.log(f.value);
   }
 
-  onSubmit(f: NgForm): void{
+  onSubmit(f: NgForm): void {
     let urlOption = '';
 
     if ( this.pageNum >= 0) {

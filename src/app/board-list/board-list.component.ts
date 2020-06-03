@@ -3,9 +3,9 @@ import { Board } from '../board';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {CommonComponent} from '../common/common.component';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 import { DataService } from '../service/data.service';
-import {AuthenticationService} from "../service/authentication.service";
+import {AuthenticationService} from '../service/authentication.service';
 
 @Component({
   selector: 'app-board-list',

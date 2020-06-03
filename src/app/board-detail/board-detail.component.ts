@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
 import { Board } from '../board';
 // import { BOARDS } from '../mock-boards';
 import {ActivatedRoute, Router} from '@angular/router';
 import { DataService } from '../service/data.service';
 import {AuthenticationService} from '../service/authentication.service';
+import {CommonComponent} from '../common/common.component';
 
 @Component({
   selector: 'app-board-detail',
   templateUrl: './board-detail.component.html',
   styleUrls: ['./board-detail.component.css']
 })
-export class BoardDetailComponent implements OnInit {
+export class BoardDetailComponent extends CommonComponent {
   text = 'YS board detail View!!';
   private pageNum: number;
   public board: Board = {
@@ -25,9 +26,11 @@ export class BoardDetailComponent implements OnInit {
   // boards = BOARDS;
 
   constructor(route: ActivatedRoute,
-              private router: Router,
-              private dataService: DataService,
-              private authService: AuthenticationService) {
+              router: Router,
+              dataService: DataService,
+              authService: AuthenticationService,
+              appInjector: Injector) {
+    super(route, router, dataService, authService, appInjector);
     this.pageNum = route.snapshot.params['page-num'];
     // this.pageData = this.boards[this.pageNum];
   }
@@ -44,8 +47,6 @@ export class BoardDetailComponent implements OnInit {
       this.board.views = this.board.views + 1;
       this.onViewUpdate();
     });
-
-
   }
 
   public onViewUpdate(): void {
