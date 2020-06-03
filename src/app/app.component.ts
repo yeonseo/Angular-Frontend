@@ -12,10 +12,10 @@ export class AppComponent implements OnInit{
   userName = '';
   constructor(private authService: AuthenticationService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     console.log(this.authService.currentUser);
     this.authService.currentUser.subscribe((data: any) => {
-      if (data){
+      if (data) {
         this.userToken = data.token;
         this.userName = data.user.pk;
       }
