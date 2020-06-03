@@ -1,16 +1,18 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import { Board } from '../board';
-// import { BOARDS } from '../mock-boards';
-import { DataService } from '../service/data.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+import {CommonComponent} from '../common/common.component';
+import {ActivatedRoute, Router} from "@angular/router";
+import { DataService } from '../service/data.service';
+import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
   selector: 'app-board-list',
   templateUrl: './board-list.component.html',
   styleUrls: ['./board-list.component.css']
 })
-export class BoardListComponent implements OnInit {
+export class BoardListComponent extends CommonComponent {
   CLASS_NAME = 'BoardListComponent';
 
   text = 'YS board list View!!';
@@ -22,9 +24,17 @@ export class BoardListComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private dataService: DataService) { }
+  // 필요시에 아래처럼 추가
+  // constructor(route: ActivatedRoute,
+  //             router: Router,
+  //             dataService: DataService,
+  //             authService: AuthenticationService,
+  //             appInjector: Injector) {
+  //   super(route, router, dataService, authService, appInjector);
+  //   console.log('addConstructor');
+  // }
 
-  ngOnInit(): void {
+  ngOnInit() {
     /* we defined a products variable and called
      *  the sendGetRequest() method of the service
      *  for fetching data from the JSON REST API server.
