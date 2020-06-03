@@ -70,7 +70,6 @@ export class BoardCreateComponent extends CommonComponent {
           console.log('The POST observable is now completed.');
         }
       );
-      console.log(this.pageNum);
     } else {
       urlOption = 'freeboards/create/';
       this.dataService.createRequest(urlOption, f.value).subscribe(
@@ -85,8 +84,6 @@ export class BoardCreateComponent extends CommonComponent {
         }
       );
     }
-    this.clickMessage = 'You are my hero!';
-
     this.dataService.goBoardList();
   }
 }
