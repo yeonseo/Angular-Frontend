@@ -13,14 +13,14 @@ export class AppComponent implements OnInit{
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
-    console.log(this.authService.currentUser);
+    // console.log(this.authService.currentUser);
     this.authService.currentUser.subscribe((data: any) => {
       if (data) {
         this.userToken = data.token;
         this.userName = data.user.pk;
       }
     });
-    console.log(this.userName + ' : ' + this.userToken);
+    // console.log(this.userName + ' : ' + this.userToken);
   }
 
   logout() {

@@ -18,7 +18,7 @@ export class UserLoginComponent implements OnInit {
 
   onClickMe(f: NgForm) {
     this.clickMessage = 'You input title : ' + f.value;
-    console.log(f.value);
+    // console.log(f.value);
   }
 
   onSubmit(f: NgForm): void{

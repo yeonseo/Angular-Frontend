@@ -35,7 +35,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     // }
 
     const tokenValue = request.headers.get('Authorization');
-    console.log('interceptor : ' + tokenValue);
+    // console.log('interceptor : ' + tokenValue);
     return next.handle(request).pipe(
       catchError(e => {
         console.log(e.error.error.message);
