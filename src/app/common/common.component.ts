@@ -19,6 +19,9 @@ export class CommonComponent implements OnInit {
   protected dataService: DataService;
   protected authService: AuthenticationService;
 
+  protected userToken: string;
+  protected userName: string;
+
   constructor(route: ActivatedRoute,
               router: Router,
               dataService: DataService,
@@ -39,6 +42,16 @@ export class CommonComponent implements OnInit {
 
   public checkAuth() {
     console.log('checkAuth');
+
+    this.authService.currentUser.subscribe((data: any) => {
+      if (data) {
+        this.userToken = data.token;
+        this.userName = data.user.pk;
+      }
+    });
   }
 
+  getUserName() {
+    return this.userName;
+  }
 }
