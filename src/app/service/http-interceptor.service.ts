@@ -20,11 +20,12 @@ export class HttpInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.authService.currentUser) {
-      this.authService.currentUser.subscribe((data: any) =>
-        this.globalToken = data.token
-      );
-    }
+    this.authService.currentUser.subscribe((data: any) => {
+      if (data) {
+        this.globalToken = data.token;
+      }
+    });
+
     const request = req.headers.has('Authorization') ?
       req : req.clone({setHeaders: { 'Authorization': this.globalToken }});
 
