@@ -14,7 +14,7 @@ export class DataService {
 
   // [GET]
   // sends a GET request to the REST API endpoint to retrieve JSON data
-  public sendGetRequest( url: string ){
+  public sendGetRequest( url: string ) {
     // Add safe, URL encoded_page parameter
     url = this.REST_API_SERVER + url;
     const options = { params: new HttpParams()};
@@ -30,10 +30,7 @@ export class DataService {
     // Add safe, URL encoded_page parameter
     url = this.REST_API_SERVER + url;
 
-    const header = {headers: new HttpHeaders().set('Authorization', 'my-auth-token')};
-    const params = {params: new HttpParams().set('id', '3'), };
-
-    return this.httpClient.post(url, body, header).pipe(
+    return this.httpClient.post(url, body).pipe(
       retry(3),
       catchError(this.handleError)
     );
@@ -45,10 +42,7 @@ export class DataService {
     // Add safe, URL encoded_page parameter
     url = this.REST_API_SERVER + url;
 
-    const header = {headers: new HttpHeaders().set('Authorization', 'my-auth-token')};
-    const params = {params: new HttpParams().set('id', '3'), };
-
-    return this.httpClient.put(url, body, header).pipe(
+    return this.httpClient.put(url, body).pipe(
       retry(3),
       catchError(this.handleError)
     );
@@ -56,14 +50,11 @@ export class DataService {
 
   // [PUT]
   //
-  public deleteRequest(url: string){
+  public deleteRequest(url: string) {
     // Add safe, URL encoded_page parameter
     url = this.REST_API_SERVER + url;
 
-    const header = {headers: new HttpHeaders().set('Authorization', 'my-auth-token')};
-    const params = {params: new HttpParams().set('id', '3'), };
-
-    return this.httpClient.delete(url, header).pipe(
+    return this.httpClient.delete(url).pipe(
       retry(3),
       catchError(this.handleError)
     );
