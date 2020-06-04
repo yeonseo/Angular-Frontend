@@ -50,7 +50,11 @@ import { CommonComponent } from './common/common.component';
   ],
   providers: [
     RequestService,
-    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
