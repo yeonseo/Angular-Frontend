@@ -21,7 +21,8 @@ export class HttpInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token: string = localStorage.getItem('token');
+    // const token: string = localStorage.getItem('token');
+    const token: string = JSON.parse(localStorage.getItem('currentUser')).token;
     if (token) {
       req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
     }
@@ -38,7 +39,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         return event;
       }),
       catchError(e => {
-        console.log('error--->>>', e.error.error.message);
+        console.log('error--->>>', e);
         return throwError(e);
       })
     );
