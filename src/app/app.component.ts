@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from './service/authentication.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,10 @@ export class AppComponent implements OnInit {
   title = 'my-view';
   userToken = '';
   userName = '';
-  constructor(private authService: AuthenticationService) { }
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     // console.log(this.authService.currentUser);
@@ -21,6 +25,14 @@ export class AppComponent implements OnInit {
       }
     });
     // console.log(this.userName + ' : ' + this.userToken);
+  }
+
+  onJoin() {
+    if (this.authService.currentUserValue) {
+      alert('로그인 상태입니다. 이미 회원가입이 되셨습니다 :-)');
+    } else {
+      this.router.navigate(['/join']);
+    }
   }
 
   logout() {
