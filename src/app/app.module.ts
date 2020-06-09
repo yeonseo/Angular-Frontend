@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 // for url
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +44,7 @@ import { CommonComponent } from './common/common.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule

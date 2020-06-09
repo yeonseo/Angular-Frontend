@@ -1,21 +1,31 @@
 <h2>user-join</h2>
 
 <div style="padding: 13px;">
-  <form #f="ngForm">
+  <form [formGroup]="joinForm" #f="ngForm">
     <mat-card>
       <mat-card-content>
-        <mat-form-field appearance="fill">
-          <mat-label>아이디</mat-label>
-          <input matInput name="username" ngModel #first="ngModel">
-        </mat-form-field>
+        <div class="cross-validation" [class.cross-validation-error]="joinForm.errors?.identityRevealed && (joinForm.touched || joinForm.dirty)">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>아이디</mat-label>
+              <input matInput id="username" class="form-control"
+                   formControlName="username" required >
+            </mat-form-field>
+            <div *ngIf="username.invalid && (username.dirty || username.touched)"
+                   class="alert alert-danger">
+              <div *ngIf="username.errors.required">이름을 입력해주십시오</div>
+              <div *ngIf="username.errors.minlength"> 이름은 3글자 이상 입력해야 합니다.</div>
+            </div>
+          </div>
+        </div>
         <br>
         <mat-form-field appearance="fill">
           <mat-label>비밀번호</mat-label>
-          <input matInput type="password" name="password1" ngModel >
+          <input matInput type="password" name="password1">
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>비밀번호 확인</mat-label>
-          <input matInput type="password" name="password2" ngModel >
+          <input matInput type="password" name="password2">
         </mat-form-field>
         <br>
         <!--<mat-form-field appearance="fill">-->
@@ -27,14 +37,14 @@
         <!--<br>-->
         <mat-form-field appearance="fill">
           <mat-label>(임시) 이메일</mat-label>
-          <textarea matInput type="email" name="email" ngModel></textarea>
+          <textarea matInput type="email" name="email"></textarea>
         </mat-form-field>
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-button value="Submit" (click)="onSubmit(f)">가입하기</button>
+        <button mat-button value="Submit" (click)="onSubmit()">가입하기</button>
         <button mat-button routerLink="/login" routerLinkActive="active">로그인</button>
-        <button mat-button (click)="onClickMe(f)">Click me!</button><br>
+        <button mat-button (click)="onClickMe()">Click me!</button><br>
         {{clickMessage}}
       </mat-card-actions>
     </mat-card>
