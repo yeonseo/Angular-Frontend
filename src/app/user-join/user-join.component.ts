@@ -86,6 +86,7 @@ export class UserJoinComponent implements OnInit {
 
   get username() { return this.joinForm.get('username'); }
   get email() { return this.joinForm.get('email'); }
-  get password() { return this.joinForm.get('password1'); }
+  get password1() { return this.joinForm.get('password1'); }
+  get password2() { return this.joinForm.get('password2'); }
 
 }

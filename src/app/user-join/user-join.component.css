@@ -1,0 +1,13 @@
+.form-box {
+  padding: 13px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.alert-danger {
+  color: firebrick;
+  font-size: 0.8rem;
+  text-align: right;
+}

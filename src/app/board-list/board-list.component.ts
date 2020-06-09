@@ -37,9 +37,9 @@ export class BoardListComponent extends CommonComponent {
   ngOnInit() {
     /* we defined a products variable and called
      *  the sendGetRequest() method of the service
-     *  for fetching data from the JSON REST API server.
+     *  for fetching error_data from the JSON REST API server.
      *  return value of the HttpClient.get() method which is an RxJS Observable
-     *  When data is received, we added it in the products array.
+     *  When error_data is received, we added it in the products array.
      */
     this.dataService.sendGetRequest('freeboards/').subscribe((data: any[]) => {
       this.datas = data;
