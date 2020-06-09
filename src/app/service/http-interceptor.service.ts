@@ -12,7 +12,7 @@ import {map} from "rxjs/internal/operators";
 export class HttpInterceptorService implements HttpInterceptor {
 
   private globalToken = 'EmptyToken';
-
+  public error_data = {};
   constructor(
     private injector: Injector,
     private requestService: RequestService,
@@ -33,19 +33,27 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          console.log('event--->>>', event);
+          console.log('Interceptor Event--->>>', event);
         }
         return event;
       }),
-      catchError(e => {
-        console.log('error--->>>', e.error.error.message);
-        return throwError(e);
+      catchError(error => {
+        this.error_data = {
+          error : error,
+          reason: error && error.error && error.error.reason ? error.error.reason : '',
+          status: error.status
+        };
+        // error_m = error && error.error && error.error.reason ? error.error.reason : '';
+        // status_m = error.status;
+        // messeage = error.error.error.message;
+        console.log('Interceptor error--->>>', this.error_data );
+        return throwError(error);
       })
     );
 
-    // this.authService.currentUser.subscribe((data: any) => {
-    //   if (data) {
-    //     this.globalToken = data.token;
+    // this.authService.currentUser.subscribe((error_data: any) => {
+    //   if (error_data) {
+    //     this.globalToken = error_data.token;
     //   }
     // });
     // const request = req.headers.has('Authorization') ?
