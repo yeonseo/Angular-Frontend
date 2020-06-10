@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import {FormControl, FormGroup, NgForm, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../service/authentication.service';
 import {DataService} from '../service/data.service';
@@ -55,12 +55,17 @@ export class UserJoinComponent implements OnInit {
         ]),
         'password2': new FormControl(this.joinUser.password2, [
           Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(20),
+          Validators.pattern('^[a-zA-Z0-9]*'),
         ]),
         'email': new FormControl(this.joinUser.password2, [
           Validators.required,
           Validators.email
         ])
-      } /* { validators: identityRevealedValidator }); // <-- add custom validator at the  */);
+      },
+      { validators: passwordCompare }
+      /* { validators: identityRevealedValidator }); // <-- add custom validator at the  */);
   }
 
   onClickMe() {
@@ -90,3 +95,10 @@ export class UserJoinComponent implements OnInit {
   get password2() { return this.joinForm.get('password2'); }
 
 }
+
+export const passwordCompare: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+  const password1 = control.get('password1');
+  const password2 = control.get('password2');
+
+  return ( password1.value !== password2.value ) ? { 'comparePassword': true } : null;
+};

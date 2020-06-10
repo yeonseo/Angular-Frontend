@@ -4,7 +4,7 @@
   <form [formGroup]="joinForm" #f="ngForm">
     <mat-card>
       <mat-card-content>
-        <div class="cross-validation" [class.cross-validation-error]="joinForm.errors?.identityRevealed && (joinForm.touched || joinForm.dirty)">
+        <div class="cross-validation" [class.cross-validation-error]="joinForm.errors?.identityRevealed && joinForm.errors?.comparePassword && (joinForm.touched || joinForm.dirty)">
           <div class="form-group">
             <mat-form-field appearance="fill">
               <mat-label>아이디</mat-label>
@@ -43,7 +43,7 @@
               <div *ngIf="password2.errors.required">비밀번호를 입력해주십시오.</div>
               <div *ngIf="password2.errors.minlength">비밀번호는 8글자 이상 입력해야 합니다.</div>
               <div *ngIf="password2.errors.maxlength">비밀번호는 20글자 이하 입력해야 합니다.</div>
-              <div *ngIf="password1 !== password2">비밀번호가 일치하지 않습니다.</div>
+              <div *ngIf="password2.errors?.passwordCompare">비밀번호가 일치하지 않습니다.</div>
             </div>
 
             <br>
