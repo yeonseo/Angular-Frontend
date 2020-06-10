@@ -75,7 +75,7 @@ export class UserJoinComponent implements OnInit {
 
   onSubmit(): void {
     const test = {};
-    this.authService.join(test).subscribe(
+    this.authService.join(this.joinForm.value).subscribe(
       (val) => {
         console.log('POST call successful value returned in body', val);
       },
@@ -100,5 +100,5 @@ export const passwordCompare: ValidatorFn = (control: FormGroup): ValidationErro
   const password1 = control.get('password1');
   const password2 = control.get('password2');
 
-  return ( password1.value !== password2.value ) ? { 'comparePassword': true } : null;
+  return ( password1.value !== password2.value ) ? { comparePassword: true } : null;
 };

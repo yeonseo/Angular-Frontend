@@ -1,7 +1,7 @@
 <h1>😊 Welcome Our Site! Sign up! ✨</h1>
 
 <div class="form-box">
-  <form [formGroup]="joinForm" #f="ngForm">
+  <form [formGroup]="joinForm" #f="ngForm" (submit)="onSubmit()" >
     <mat-card>
       <mat-card-content>
         <div class="cross-validation" [class.cross-validation-error]="joinForm.errors?.identityRevealed && joinForm.errors?.comparePassword && (joinForm.touched || joinForm.dirty)">
@@ -38,14 +38,8 @@
               <input matInput type="password" id="password2" class="form-control"
                      formControlName="password2" required >
             </mat-form-field>
-            <div *ngIf="password2.invalid && (password2.dirty || password2.touched)"
-                 class="alert alert-danger">
-              <div *ngIf="password2.errors.required">비밀번호를 입력해주십시오.</div>
-              <div *ngIf="password2.errors.minlength">비밀번호는 8글자 이상 입력해야 합니다.</div>
-              <div *ngIf="password2.errors.maxlength">비밀번호는 20글자 이하 입력해야 합니다.</div>
-              <div *ngIf="password2.errors?.passwordCompare">비밀번호가 일치하지 않습니다.</div>
-            </div>
-
+            <div *ngIf="password2.touched && joinForm.errors?.comparePassword"
+                 class="alert alert-danger">비밀번호가 일치하지 않습니다.</div>
             <br>
 
             <mat-form-field appearance="fill">
@@ -63,7 +57,8 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-button value="Submit" (click)="onSubmit()">가입하기</button>
+        <button mat-button value="submit" [disabled]="joinForm.invalid">가입하기</button>
+        <button mat-button type="button" (click)="f.resetForm({})">새로작성하기</button>
         <button mat-button routerLink="/login" routerLinkActive="active">로그인</button>
       </mat-card-actions>
     </mat-card>
