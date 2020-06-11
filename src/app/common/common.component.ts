@@ -46,7 +46,9 @@ export class CommonComponent implements OnInit {
     this.userToken = localStorage.getItem('token');
     this.authService.currentUser.subscribe((data: any) => {
       if (data) {
-        this.userName = data.user.username;
+        console.log(data);
+        this.userName = data.user.id;
+        // this.userName = data.user.username;
       }
     });
   }

@@ -89,11 +89,11 @@ export class BoardDetailComponent extends CommonComponent {
 
   submitUserCheck(): boolean {
     // redirect to home if already logged in
-    if (this.authService.currentUserValue.user.pk === this.board.username) {
-      return true;
-    } else if (!this.authService.currentUserValue) {
+    if (!this.authService.currentUserValue) {
       this.router.navigateByUrl('/login');
-    } else {
+    } else if (this.authService.currentUserValue.user.username === this.board.username) {
+      return true;
+    }   else {
       alert('수정권한이 없습니다');
     }
     return false;

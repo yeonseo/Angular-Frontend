@@ -53,4 +53,20 @@ export class BoardListComponent extends CommonComponent {
     this.selectedBoard = board;
   }
 
+  onBoardCreate() {
+    if (this.submitUserCheck()) {
+      this.router.navigateByUrl('/board-create');
+    }
+  }
+
+  submitUserCheck(): boolean {
+    // redirect to home if already logged in
+    if (this.authService.currentUserValue) {
+      return true;
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+    return false;
+  }
+
 }

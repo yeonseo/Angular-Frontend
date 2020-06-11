@@ -56,6 +56,7 @@ export class BoardCreateComponent extends CommonComponent {
 
   onSubmit(f: NgForm): void {
     let urlOption = '';
+    console.log(f.value);
 
     if ( this.pageNum >= 0) {
       urlOption = 'freeboards/' + this.pageNum + '/update/';

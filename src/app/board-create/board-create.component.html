@@ -6,12 +6,12 @@
       <mat-card-content>
         <mat-form-field appearance="fill">
           <mat-label>작성자 (NUMBER)</mat-label>
-          <input matInput name="username" [(ngModel)]="board.username" disabled>
+          <input matInput name="username" [(ngModel)]="board.username" #first="ngModel">
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
           <mat-label>제목</mat-label>
-          <input matInput name="title" [(ngModel)]="board.title" #first="ngModel">
+          <input matInput name="title" [(ngModel)]="board.title" >
         </mat-form-field>
         <br>
         <!--<mat-form-field appearance="fill">-->

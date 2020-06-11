@@ -68,5 +68,5 @@
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-  <button mat-button routerLink="/board-create" routerLinkActive="active">글쓰기</button>
+  <button mat-button (click)="onBoardCreate()">글쓰기</button>
 </div>
