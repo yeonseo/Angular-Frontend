@@ -18,6 +18,9 @@ export class UserJoinComponent implements OnInit {
     email: ''
   };
 
+  usernameExists = false;
+  emailExists = false;
+
 // : {
 //   username: string;
 //   password1: string;
@@ -78,6 +81,22 @@ export class UserJoinComponent implements OnInit {
       },
       response => {
         console.log('POST call in error', response);
+        if (response.error.username) {
+          for ( let i = 0; i < response.error.username.length ; i++) {
+            if (response.error.username[i].indexOf('already')) {
+              console.log(response.error.username[i]);
+              this.usernameExists = true;
+            }
+          }
+        }
+        if (response.error.email) {
+          for ( let i = 0; i < response.error.email.length ; i++) {
+            if (response.error.email[i].indexOf('already')) {
+              console.log(response.error.email[i]);
+              this.emailExists = true;
+            }
+          }
+        }
       },
       () => {
         console.log('The POST observable is now completed.');

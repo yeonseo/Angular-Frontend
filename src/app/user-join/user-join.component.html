@@ -16,6 +16,7 @@
               <div *ngIf="username.errors.required">이름을 입력해주십시오</div>
               <div *ngIf="username.errors.minlength"> 이름은 3글자 이상 입력해야 합니다.</div>
             </div>
+            <div *ngIf="usernameExists">❗ 이미 사용중인 이름입니다. 다른 이름으로 입력해주세요.</div>
 
             <br>
 
@@ -56,6 +57,7 @@
               <div *ngIf="email.errors.required">이메일을 입력해주십시오.</div>
               <div *ngIf="email.errors.email">aaa@bbb.ccc 형식으로 입력해주십시오.</div>
             </div>
+            <div *ngIf="emailExists">❗ 이미 사용중인 이메일입니다. 다른 이메일을 입력해주세요.</div>
           </div>
         </div>
       </mat-card-content>
