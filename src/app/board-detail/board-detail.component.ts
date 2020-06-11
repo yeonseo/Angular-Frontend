@@ -61,31 +61,41 @@ export class BoardDetailComponent extends CommonComponent {
   }
 
   onDelete(): void {
-    this.dataService.deleteRequest('freeboards/' + this.pageNum + '/delete/').subscribe(
-      (val) => {
-        console.log('DELETE call successful value returned in body', val);
-      },
-      response => {
-        console.log('DELETE call in error', response);
-      },
-      () => {
-        console.log('The DELETE observable is now completed.');
-      }
-    );
-    // 왜 subscribe()이 있어야 하지???
-    this.dataService.goBoardList();
+    if (this.submitUserCheck()) {
+      if (confirm('게시물을 정말 삭제하시겠습니까? 삭제된 게시물은 다시 복구되지 않습니다.')) {
+        this.dataService.deleteRequest('freeboards/' + this.pageNum + '/delete/').subscribe(
+          (val) => {
+            console.log('DELETE call successful value returned in body', val);
+            alert('게시물이 성공적으로 삭제되었습니다.');
+          },
+          response => {
+            console.log('DELETE call in error', response);
+          },
+          () => {
+            console.log('The DELETE observable is now completed.');
+          }
+        );
+        // [???] 왜 subscribe()이 있어야 하지?
+        this.dataService.goBoardList();
+      } // end of if (confirm)
+    } // end of if (this.submitUserCheck())
   }
 
-  submitUserCheck(): void {
-    // redirect to home if already logged in
-    if (!this.authService.currentUserValue) {
-      this.router.navigateByUrl('/login');
-    } else if (this.authService.currentUserValue.user.pk === this.board.username) {
+  onModify(): void {
+    if (this.submitUserCheck()) {
       this.router.navigateByUrl('/board-update/' + this.board.id);
-    } else {
-      alert('수정권한이 없습니다');
-      this.router.navigateByUrl('/');
     }
   }
 
+  submitUserCheck(): boolean {
+    // redirect to home if already logged in
+    if (this.authService.currentUserValue.user.pk === this.board.username) {
+      return true;
+    } else if (!this.authService.currentUserValue) {
+      this.router.navigateByUrl('/login');
+    } else {
+      alert('수정권한이 없습니다');
+    }
+    return false;
+  }
 }
