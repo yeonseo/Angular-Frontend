@@ -1,4 +1,4 @@
-export class Board{
+export class Board {
   id: string;
   title: string;
   username: string;

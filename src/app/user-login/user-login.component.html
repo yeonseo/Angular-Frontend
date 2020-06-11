@@ -14,24 +14,11 @@
           <input matInput type="password" name="password" ngModel >
         </mat-form-field>
         <br>
-        <!--<mat-form-field appearance="fill">-->
-        <!--<mat-label>Select</mat-label>-->
-        <!--<mat-select>-->
-        <!--<mat-option value="option">Option</mat-option>-->
-        <!--</mat-select>-->
-        <!--</mat-form-field>-->
-        <!--<br>-->
-        <mat-form-field appearance="fill">
-          <mat-label>(임시) 이메일</mat-label>
-          <textarea matInput type="email" name="email" ngModel></textarea>
-        </mat-form-field>
       </mat-card-content>
 
       <mat-card-actions>
         <button mat-button value="Submit" (click)="onSubmit(f)">로그인</button>
         <button mat-button routerLink="/join" routerLinkActive="active">회원가입</button>
-        <button mat-button (click)="onClickMe(f)">Click me!</button><br>
-        {{clickMessage}}
       </mat-card-actions>
     </mat-card>
   </form>

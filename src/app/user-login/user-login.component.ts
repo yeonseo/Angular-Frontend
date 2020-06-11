@@ -9,16 +9,9 @@ import {AuthenticationService} from '../service/authentication.service';
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
-  clickMessage = '';
-
   constructor(private authService: AuthenticationService, private dataService: DataService) { }
 
   ngOnInit(): void {
-  }
-
-  onClickMe(f: NgForm) {
-    this.clickMessage = 'You input title : ' + f.value;
-    // console.log(f.value);
   }
 
   onSubmit(f: NgForm): void{
@@ -34,6 +27,5 @@ export class UserLoginComponent implements OnInit {
         this.dataService.goBoardList();
       }
     );
-
   }
 }

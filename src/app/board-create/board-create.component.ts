@@ -39,8 +39,6 @@ export class BoardCreateComponent extends CommonComponent {
   }
 
   ngOnInit(): void {
-    this.board.username = super.getUserName();
-
     if ( this.pageNum >= 0 ) {
       this.dataService.sendGetRequest('freeboards/' + this.pageNum).subscribe((data: any) => {
         this.board = data;
@@ -56,8 +54,6 @@ export class BoardCreateComponent extends CommonComponent {
 
   onSubmit(f: NgForm): void {
     let urlOption = '';
-    console.log(f.value);
-
     if ( this.pageNum >= 0) {
       urlOption = 'freeboards/' + this.pageNum + '/update/';
       this.dataService.updateRequest(urlOption, f.value).subscribe(
@@ -85,7 +81,7 @@ export class BoardCreateComponent extends CommonComponent {
         }
       );
     }
-    this.dataService.goBoardList();
+    // this.dataService.goBoardList();
   }
 }
 
