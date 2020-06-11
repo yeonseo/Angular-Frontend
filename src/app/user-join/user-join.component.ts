@@ -44,7 +44,7 @@ export class UserJoinComponent implements OnInit {
         'username': new FormControl(this.joinUser.username, [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(10),
+          Validators.maxLength(20),
         ]),
         'password1': new FormControl(this.joinUser.password1, [
           Validators.required,
@@ -54,9 +54,6 @@ export class UserJoinComponent implements OnInit {
         ]),
         'password2': new FormControl(this.joinUser.password2, [
           Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(20),
-          Validators.pattern('^[a-zA-Z0-9]*'),
         ]),
         'email': new FormControl(this.joinUser.password2, [
           Validators.required,
@@ -77,6 +74,7 @@ export class UserJoinComponent implements OnInit {
     this.authService.join(this.joinForm.value).subscribe(
       (val) => {
         console.log('POST call successful value returned in body', val);
+        alert('가입되셨습니다 ❤');
       },
       response => {
         console.log('POST call in error', response);
