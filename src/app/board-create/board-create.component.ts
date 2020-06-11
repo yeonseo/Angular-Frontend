@@ -81,7 +81,7 @@ export class BoardCreateComponent extends CommonComponent {
         }
       );
     }
-    // this.dataService.goBoardList();
+    this.dataService.goBoardList();
   }
 }
 
