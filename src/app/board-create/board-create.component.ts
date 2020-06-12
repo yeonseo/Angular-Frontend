@@ -64,27 +64,27 @@ export class BoardCreateComponent extends CommonComponent {
       urlOption = 'freeboards/' + this.pageNum + '/update/';
       this.dataService.updateRequest(urlOption, this.board).subscribe(
         (val) => {
-          console.log('POST call successful value returned in body', val);
+          // console.log('POST call successful value returned in body', val);
         },
         response => {
-          console.log('POST call in error', response);
+          // console.log('POST call in error', response);
         },
         () => {
-          console.log('The POST observable is now completed.');
+          // console.log('The POST observable is now completed.');
         }
       );
     } else {
       urlOption = 'freeboards/create/';
       this.dataService.createRequest(urlOption, this.board).subscribe(
         (val) => {
-          console.log('POST call successful value returned in body', val);
+          // console.log('POST call successful value returned in body', val);
           this.dataService.goBoardList();
         },
         response => {
-          console.log('POST call in error : ', response);
+          // console.log('POST call in error : ', response);
         },
         () => {
-          console.log('The POST observable is now completed.');
+          // console.log('The POST observable is now completed.');
         }
       );
     }

@@ -1,7 +1,7 @@
 import {Injectable, Injector} from '@angular/core';
 import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse} from '@angular/common/http';
-import { Observable, throwError } from 'rxjs/';
-import { catchError } from 'rxjs/operators';
+import {Observable, throwError} from 'rxjs/';
+import {catchError} from 'rxjs/operators';
 import {RequestService} from "./request.service";
 import {AuthenticationService} from "./authentication.service";
 import {map, retry} from "rxjs/internal/operators";
@@ -13,24 +13,23 @@ export class HttpInterceptorService implements HttpInterceptor {
 
   private globalToken = 'EmptyToken';
   public error_data = {};
-  public errorCostom = {};
-  constructor(
-    private injector: Injector,
-    private requestService: RequestService,
-    private authService: AuthenticationService
-  ) {
+  public errorCostom = '';
+
+  constructor(private injector: Injector,
+              private requestService: RequestService,
+              private authService: AuthenticationService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // const token: string = localStorage.getItem('token');
     const currentUser: string = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser) {
-      req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + currentUser['token']) });
+      req = req.clone({headers: req.headers.set('Authorization', 'Bearer ' + currentUser['token'])});
     }
     if (!req.headers.has('Content-Type')) {
-      req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
+      req = req.clone({headers: req.headers.set('Content-Type', 'application/json')});
     }
-    req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
+    req = req.clone({headers: req.headers.set('Accept', 'application/json')});
 
     return next.handle(req).pipe(
       retry(3),
@@ -40,31 +39,8 @@ export class HttpInterceptorService implements HttpInterceptor {
         }
         return event;
       }),
-      catchError(error => {
-        this.error_data = {
-          error : error,
-          reason: error && error.error && error.error.reason ? error.error.reason : '',
-          status: error.status
-        };
-        // error_m = error && error.error && error.error.reason ? error.error.reason : '';
-        // status_m = error.status;
-        // messeage = error.error.error.message;
-        console.log('Interceptor error--->>>', this.error_data );
-
-        if (this.error_data['status'] === 400) {
-          this.errorCostom = {'message' : '잘못된 요청입니다. 입력칸을 다시 확인해주세요. \n계속 오류가 발생될 경우, 관리자에게 문의바랍니다.'};
-          // return this.errorCostom; -> Observable ㅠㅠ
-        }
-        if (this.error_data['status'] === 403) {
-          this.errorCostom = {'message' : '접근 권한이 없습니다. 권한 변경을 원하시면 관리자에게 문의바랍니다.'};
-        }
-
-        if (this.errorCostom['message'] !== '') {
-          alert(this.errorCostom['message']);
-          // return; 이것도 아닌듯 ㅠㅠ
-        }
-        return throwError(error);
-      })
+      catchError(this.handleError),
+      // catchError(this.handleErrorRef),
     );
 
     // this.authService.currentUser.subscribe((error_data: any) => {
@@ -85,4 +61,57 @@ export class HttpInterceptorService implements HttpInterceptor {
     //   })
     // );
   }
+
+
+  handleError(error) {
+    this.error_data = {
+      error: error,
+      reason: error && error.error && error.error.reason ? error.error.reason : '',
+      status: error.status
+    };
+    // error_m = error && error.error && error.error.reason ? error.error.reason : '';
+    // status_m = error.status;
+    // messeage = error.error.error.message;
+    console.log('Interceptor error--->>>', this.error_data);
+
+    if (this.error_data['status'] === 400) {
+      this.errorCostom =
+        `잘못된 요청입니다. 입력칸을 다시 확인해주세요.
+        계속 오류가 발생될 경우, 관리자에게 문의바랍니다.
+      \n code : ${this.error_data['status']}`;
+      // return this.errorCostom; -> Observable ㅠㅠ
+    }
+    if (this.error_data['status'] === 403) {
+      this.errorCostom =
+        `접근 권한이 없습니다. 권한 변경을 원하시면 관리자에게 문의바랍니다.
+      \n code : ${this.error_data['status']}`;
+    }
+
+    if (this.errorCostom['message'] !== '') {
+      alert(this.errorCostom);
+      return throwError(this.errorCostom);
+    }
+    return throwError(error);
+  }
+
+  handleErrorRef(error) {
+    let errorMessage = '';
+
+    this.error_data = {
+      error: error,
+      reason: error && error.error && error.error.reason ? error.error.reason : '',
+      status: error.status
+    };
+
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+  }
+
 }

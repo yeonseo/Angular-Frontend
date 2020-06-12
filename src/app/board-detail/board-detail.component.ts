@@ -14,7 +14,7 @@ import {CommonComponent} from '../common/common.component';
 export class BoardDetailComponent extends CommonComponent {
   text = 'YS board detail View!!';
   private pageNum: number;
-  public board: Board = {
+  public board = {
     id: '',
     title: '',
     username: '',
@@ -23,7 +23,6 @@ export class BoardDetailComponent extends CommonComponent {
     views: 0,
     content: ''
   };
-  // boards = BOARDS;
 
   constructor(route: ActivatedRoute,
               router: Router,
@@ -65,14 +64,14 @@ export class BoardDetailComponent extends CommonComponent {
       if (confirm('게시물을 정말 삭제하시겠습니까? 삭제된 게시물은 다시 복구되지 않습니다.')) {
         this.dataService.deleteRequest('freeboards/' + this.pageNum + '/delete/').subscribe(
           (val) => {
-            console.log('DELETE call successful value returned in body', val);
+            // console.log('DELETE call successful value returned in body', val);
             alert('게시물이 성공적으로 삭제되었습니다.');
           },
           response => {
-            console.log('DELETE call in error', response);
+            // console.log('DELETE call in error', response);
           },
           () => {
-            console.log('The DELETE observable is now completed.');
+            // console.log('The DELETE observable is now completed.');
           }
         );
         // [???] 왜 subscribe()이 있어야 하지?
