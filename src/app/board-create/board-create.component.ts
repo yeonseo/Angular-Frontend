@@ -2,7 +2,7 @@ import {Component, Injector, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { DataService } from '../service/data.service';
 import {Board} from '../board';
-import {NgForm} from '@angular/forms';
+import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {CommonComponent} from "../common/common.component";
 import {AuthenticationService} from "../service/authentication.service";
 
@@ -14,8 +14,8 @@ import {AuthenticationService} from "../service/authentication.service";
 
 export class BoardCreateComponent extends CommonComponent {
   text = 'YS board create View!!';
-  clickMessage = '';
-  board: Board = {
+  boardForm: FormGroup;
+  board = {
     id: '',
     title: '',
     username: '',
@@ -45,18 +45,24 @@ export class BoardCreateComponent extends CommonComponent {
       });
     }
 
-
+    this.boardForm = new FormGroup({
+        'title': new FormControl(this.board.title, [
+          Validators.required,
+          Validators.minLength(1),
+        ]),
+        'content': new FormControl(this.board.content, [
+          Validators.required,
+          Validators.minLength(1),
+        ]),
+      },
+      /* { validators: identityRevealedValidator }); // <-- add custom validator at the  */);
   }
 
-  onClickMe(f: NgForm) {
-    this.clickMessage = 'You input title : ' + f.value;
-  }
-
-  onSubmit(f: NgForm): void {
+  onSubmit(): void {
     let urlOption = '';
     if ( this.pageNum >= 0) {
       urlOption = 'freeboards/' + this.pageNum + '/update/';
-      this.dataService.updateRequest(urlOption, f.value).subscribe(
+      this.dataService.updateRequest(urlOption, this.board).subscribe(
         (val) => {
           console.log('POST call successful value returned in body', val);
         },
@@ -69,19 +75,28 @@ export class BoardCreateComponent extends CommonComponent {
       );
     } else {
       urlOption = 'freeboards/create/';
-      this.dataService.createRequest(urlOption, f.value).subscribe(
+      this.dataService.createRequest(urlOption, this.board).subscribe(
         (val) => {
           console.log('POST call successful value returned in body', val);
+          this.dataService.goBoardList();
         },
         response => {
-          console.log('POST call in error', response);
+          console.log('POST call in error : ', response);
         },
         () => {
           console.log('The POST observable is now completed.');
         }
       );
     }
-    this.dataService.goBoardList();
+  } // end of onSubmit()
+
+
+  get title() {
+    return this.boardForm.get('title');
+  }
+
+  get content() {
+    return this.boardForm.get('content');
   }
 }
 

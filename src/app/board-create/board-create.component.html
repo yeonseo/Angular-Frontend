@@ -1,9 +1,7 @@
-<h1>{{ text }}</h1>
-
-<div style="padding: 13px;">
-  <form #f="ngForm">
-    <mat-card>
-      <mat-card-content>
+<div class="form-box">
+  <form [formGroup]="boardForm" #f="ngForm" (submit)="onSubmit()">
+    <mat-card class="cross-validation" [class.cross-validation-error]="boardForm.errors?.identityRevealed && (boardForm.touched || boardForm.dirty)" >
+      <mat-card-content class="form-group">
         <!--<mat-form-field appearance="fill">-->
           <!--<mat-label>작성자</mat-label>-->
           <!--<input matInput name="username" [(ngModel)]="board.username" #first="ngModel">-->
@@ -11,8 +9,13 @@
         <br>
         <mat-form-field appearance="fill">
           <mat-label>제목</mat-label>
-          <input matInput name="title" [(ngModel)]="board.title" >
+          <input matInput id="title" name="title" class="form-control"
+                 formControlName="title" required>
         </mat-form-field>
+        <div *ngIf="title.invalid && (title.dirty || title.touched)"
+             class="alert alert-danger">
+          <div *ngIf="title.errors.required">제목을 입력해주십시오</div>
+        </div>
         <br>
         <!--<mat-form-field appearance="fill">-->
         <!--<mat-label>Select</mat-label>-->
@@ -23,15 +26,19 @@
         <!--<br>-->
         <mat-form-field appearance="fill">
           <mat-label>내용</mat-label>
-          <textarea matInput name="content" [(ngModel)]="board.content"></textarea>
+          <textarea matInput id="content" name="content" class="form-control"
+                    formControlName="content" required></textarea>
         </mat-form-field>
+        <div *ngIf="content.invalid && (content.dirty || content.touched)"
+             class="alert alert-danger">
+          <div *ngIf="content.errors.required">내용을 입력해주십시오</div>
+        </div>
+
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-button value="Submit" (click)="onSubmit(f)">작성하기</button>
+        <button mat-button value="submit" [disabled]="boardForm.invalid">작성하기</button>
         <button mat-button routerLink="/board-list" routerLinkActive="active">목록보기</button>
-        <button mat-button (click)="onClickMe(f)">Click me!</button><br>
-        {{clickMessage}}
       </mat-card-actions>
     </mat-card>
   </form>
