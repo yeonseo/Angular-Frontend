@@ -19,7 +19,6 @@ export class DataService {
     url = this.REST_API_SERVER + url;
     const options = { params: new HttpParams()};
     return this.httpClient.get(url).pipe(
-      retry(3),
       catchError(this.handleError)
     );
   }
@@ -31,7 +30,6 @@ export class DataService {
     url = this.REST_API_SERVER + url;
 
     return this.httpClient.post(url, body).pipe(
-      retry(3),
       catchError(this.handleError)
     );
   }
@@ -43,7 +41,6 @@ export class DataService {
     url = this.REST_API_SERVER + url;
 
     return this.httpClient.put(url, body).pipe(
-      retry(3),
       catchError(this.handleError)
     );
   }
@@ -55,7 +52,6 @@ export class DataService {
     url = this.REST_API_SERVER + url;
 
     return this.httpClient.delete(url).pipe(
-      retry(3),
       catchError(this.handleError)
     );
   }

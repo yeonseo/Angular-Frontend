@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs/';
 import { catchError } from 'rxjs/operators';
 import {RequestService} from "./request.service";
 import {AuthenticationService} from "./authentication.service";
-import {map} from "rxjs/internal/operators";
+import {map, retry} from "rxjs/internal/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 
   private globalToken = 'EmptyToken';
   public error_data = {};
+  public errorCostom = {};
   constructor(
     private injector: Injector,
     private requestService: RequestService,
@@ -32,6 +33,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
 
     return next.handle(req).pipe(
+      retry(3),
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
           console.log('Interceptor Event--->>>', event);
@@ -48,6 +50,19 @@ export class HttpInterceptorService implements HttpInterceptor {
         // status_m = error.status;
         // messeage = error.error.error.message;
         console.log('Interceptor error--->>>', this.error_data );
+
+        if (this.error_data['status'] === 400) {
+          this.errorCostom = {'message' : '잘못된 요청입니다. 입력칸을 다시 확인해주세요. \n계속 오류가 발생될 경우, 관리자에게 문의바랍니다.'};
+          // return this.errorCostom; -> Observable ㅠㅠ
+        }
+        if (this.error_data['status'] === 403) {
+          this.errorCostom = {'message' : '접근 권한이 없습니다. 권한 변경을 원하시면 관리자에게 문의바랍니다.'};
+        }
+
+        if (this.errorCostom['message'] !== '') {
+          alert(this.errorCostom['message']);
+          // return; 이것도 아닌듯 ㅠㅠ
+        }
         return throwError(error);
       })
     );
