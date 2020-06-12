@@ -36,14 +36,17 @@ export class BoardCreateComponent extends CommonComponent {
     if (route.snapshot.params['page-num'] !== '' || route.snapshot.params['page-num'] !== null) {
       this.pageNum = route.snapshot.params['page-num'];
     }
-  }
 
-  ngOnInit(): void {
     if ( this.pageNum >= 0 ) {
       this.dataService.sendGetRequest('freeboards/' + this.pageNum).subscribe((data: any) => {
+        console.log(data);
         this.board = data;
       });
     }
+  }
+
+  ngOnInit(): void {
+
 
     this.boardForm = new FormGroup({
         'title': new FormControl(this.board.title, [

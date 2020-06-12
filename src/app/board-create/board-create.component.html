@@ -10,7 +10,7 @@
         <mat-form-field appearance="fill">
           <mat-label>제목</mat-label>
           <input matInput id="title" name="title" class="form-control"
-                 formControlName="title" required>
+                 formControlName="title" value="{{this.board.title}}" required>
         </mat-form-field>
         <div *ngIf="title.invalid && (title.dirty || title.touched)"
              class="alert alert-danger">
@@ -27,7 +27,7 @@
         <mat-form-field appearance="fill">
           <mat-label>내용</mat-label>
           <textarea matInput id="content" name="content" class="form-control"
-                    formControlName="content" required></textarea>
+                    formControlName="content" value="{{this.board.content}}" required></textarea>
         </mat-form-field>
         <div *ngIf="content.invalid && (content.dirty || content.touched)"
              class="alert alert-danger">
