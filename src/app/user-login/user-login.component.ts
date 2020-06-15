@@ -16,7 +16,8 @@ export class UserLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(f: NgForm): void{
+  onSubmit(f: NgForm): void {
+    this.incorrectUser = false;
     this.authService.login(f.value).subscribe(
       (val) => {
         console.log('POST call successful value returned in body', val);
