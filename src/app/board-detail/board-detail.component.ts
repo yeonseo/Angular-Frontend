@@ -44,7 +44,7 @@ export class BoardDetailComponent extends CommonComponent {
     this.dataService.sendGetRequest('freeboards/' + this.pageNum).subscribe((data: any) => {
       this.board = data;
       this.board.views = this.board.views + 1;
-      this.onViewUpdate();
+      // this.onViewUpdate();
     });
   }
 
