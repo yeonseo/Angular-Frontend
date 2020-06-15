@@ -46,8 +46,6 @@ export class BoardCreateComponent extends CommonComponent {
   }
 
   ngOnInit(): void {
-
-
     this.boardForm = new FormGroup({
         'title': new FormControl(this.board.title, [
           Validators.required,
@@ -65,9 +63,10 @@ export class BoardCreateComponent extends CommonComponent {
     let urlOption = '';
     if ( this.pageNum >= 0) {
       urlOption = 'freeboards/' + this.pageNum + '/update/';
-      this.dataService.updateRequest(urlOption, this.board).subscribe(
+      this.dataService.updateRequest(urlOption, this.boardForm.value).subscribe(
         (val) => {
           // console.log('POST call successful value returned in body', val);
+          this.router.navigateByUrl('/board-detail/' + this.board.id);
         },
         response => {
           // console.log('POST call in error', response);
@@ -78,7 +77,7 @@ export class BoardCreateComponent extends CommonComponent {
       );
     } else {
       urlOption = 'freeboards/create/';
-      this.dataService.createRequest(urlOption, this.board).subscribe(
+      this.dataService.createRequest(urlOption, this.boardForm.value).subscribe(
         (val) => {
           // console.log('POST call successful value returned in body', val);
           this.dataService.goBoardList();

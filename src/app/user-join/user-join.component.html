@@ -57,7 +57,7 @@
               <div *ngIf="email.errors.required">이메일을 입력해주십시오.</div>
               <div *ngIf="email.errors.email">aaa@bbb.ccc 형식으로 입력해주십시오.</div>
             </div>
-            <div *ngIf="emailExists">❗ 이미 사용중인 이메일입니다. 다른 이메일을 입력해주세요.</div>
+            <div class="alert alert-danger" *ngIf="emailExists">❗ 이미 사용중인 이메일입니다. 다른 이메일을 입력해주세요.</div>
           </div>
         </div>
       </mat-card-content>

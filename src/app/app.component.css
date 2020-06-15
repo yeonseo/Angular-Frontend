@@ -1,1 +1,5 @@
 /*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
+.logo {
+  font-size: 1.5rem;
+  font-weight: 200;
+}

@@ -15,7 +15,7 @@ import {AuthenticationService} from '../service/authentication.service';
 export class BoardListComponent extends CommonComponent {
   CLASS_NAME = 'BoardListComponent';
 
-  text = 'YS board list View!!';
+  text = '자유게시판';
   datas = [];
   selectedBoard: Board;
 

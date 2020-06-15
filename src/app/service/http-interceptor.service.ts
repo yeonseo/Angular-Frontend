@@ -89,7 +89,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 
     if (this.errorCostom['message'] !== '') {
       // alert(this.errorCostom);
-      return throwError(this.errorCostom);
+      // return throwError(this.errorCostom);
     }
     return throwError(error);
   }

@@ -9,6 +9,8 @@ import {AuthenticationService} from '../service/authentication.service';
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
+  incorrectUser = false;
+
   constructor(private authService: AuthenticationService, private dataService: DataService) { }
 
   ngOnInit(): void {
@@ -21,6 +23,9 @@ export class UserLoginComponent implements OnInit {
       },
       response => {
         console.log('POST call in error', response);
+        if (response.error) {
+          this.incorrectUser = true;
+        }
       },
       () => {
         console.log('The POST observable is now completed.');
