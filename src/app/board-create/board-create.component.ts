@@ -66,6 +66,7 @@ export class BoardCreateComponent extends CommonComponent {
       this.dataService.updateRequest(urlOption, this.boardForm.value).subscribe(
         (val) => {
           // console.log('POST call successful value returned in body', val);
+          alert("수정이 완료되었습니다!");
           this.router.navigateByUrl('/board-detail/' + this.board.id);
         },
         response => {
@@ -80,6 +81,7 @@ export class BoardCreateComponent extends CommonComponent {
       this.dataService.createRequest(urlOption, this.boardForm.value).subscribe(
         (val) => {
           // console.log('POST call successful value returned in body', val);
+          alert("작성이 완료되었습니다!");
           this.dataService.goBoardList();
         },
         response => {
