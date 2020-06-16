@@ -56,6 +56,7 @@ export class BoardDetailComponent extends CommonComponent {
           },
           response => {
             // console.log('DELETE call in error', response);
+            alert('잘못된 접근입니다.');
           },
           () => {
             // console.log('The DELETE observable is now completed.');
