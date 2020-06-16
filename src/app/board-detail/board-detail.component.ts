@@ -43,20 +43,7 @@ export class BoardDetailComponent extends CommonComponent {
      */
     this.dataService.sendGetRequest('freeboards/' + this.pageNum).subscribe((data: any) => {
       this.board = data;
-      this.board.views = this.board.views + 1;
-      // this.onViewUpdate();
     });
-  }
-
-  public onViewUpdate(): void {
-    this.dataService.updateRequest('freeboards/' + this.pageNum + '/update/',
-      {
-        title: this.board.title,
-        content: this.board.content,
-        username: this.board.username,
-        views: this.board.views})
-      .subscribe((data: any) => {
-      });
   }
 
   onDelete(): void {
