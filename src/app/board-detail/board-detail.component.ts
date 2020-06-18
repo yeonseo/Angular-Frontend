@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { DataService } from '../service/data.service';
 import {AuthenticationService} from '../service/authentication.service';
 import {CommonComponent} from '../common/common.component';
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-board-detail',
@@ -21,8 +22,11 @@ export class BoardDetailComponent extends CommonComponent {
     created: '',
     updated: '',
     views: 0,
-    content: ''
+    content: '',
+    comments: [],
   };
+
+  commentForm: FormGroup;
 
   constructor(route: ActivatedRoute,
               router: Router,
@@ -43,6 +47,10 @@ export class BoardDetailComponent extends CommonComponent {
      */
     this.dataService.sendGetRequest('freeboards/' + this.pageNum).subscribe((data: any) => {
       this.board = data;
+    });
+
+    this.commentForm = new FormGroup({
+      comment: new FormControl()
     });
   }
 
@@ -74,6 +82,22 @@ export class BoardDetailComponent extends CommonComponent {
     }
   }
 
+  onCommentSubmit(): void {
+    this.dataService.createRequest('freeboards/' + this.board.id + '/comment_create/', {'comment': this.commentForm.get('comment').value, 'board': this.board.id}).subscribe(
+      (val) => {
+        // console.log('POST call successful value returned in body', val);
+        this.router.navigateByUrl('/board-detail/' + this.board.id);
+        window.location.reload();
+      },
+      response => {
+        // console.log('POST call in error', response);
+      },
+      () => {
+        // console.log('The POST observable is now completed.');
+      }
+    );
+  }
+
   submitUserCheck(): boolean {
     // redirect to home if already logged in
     if (!this.authService.currentUserValue) {
@@ -84,5 +108,9 @@ export class BoardDetailComponent extends CommonComponent {
       alert('수정권한이 없습니다');
     }
     return false;
+  }
+
+  get comment() {
+    return this.commentForm.get('comment');
   }
 }

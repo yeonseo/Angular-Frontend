@@ -14,6 +14,34 @@
       </pre>
       <!--<img *ngIf="board.files !== null " style="height:100%; width: 100%;" src="{{ board.files }}" />-->
     </mat-card-content>
+
+    <mat-card-content class="comment-box" *ngIf="board.comments !== []">
+      <div *ngFor="let comment of board.comments">
+        <mat-divider></mat-divider>
+        <mat-card-subtitle>
+          {{comment.username}} | {{comment.created | date:'yyyy/MM/dd HH:mm'}}
+        </mat-card-subtitle>
+        <mat-card-subtitle>{{comment.comment}}</mat-card-subtitle>
+      </div>
+
+      <form [formGroup]="commentForm" #f="ngForm" (ngSubmit)="onCommentSubmit()">
+        <div  class="cross-validation" [class.cross-validation-error]="commentForm.errors?.identityRevealed && (commentForm.touched || commentForm.dirty)" >
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>내용을 입력해주세요.</mat-label>
+              <textarea matInput id="comment" name="comment" class="form-control"
+                        formControlName="comment" required></textarea>
+            </mat-form-field>
+            <button mat-button class="commnet-button" value="submit" [disabled]="commentForm.invalid">댓글달기</button>
+            <!--<div *ngIf="comment.invalid && (comment.dirty || comment.touched)"-->
+                 <!--class="alert alert-danger">-->
+              <!--<div *ngIf="comment.errors.required">내용을 입력해주십시오</div>-->
+            <!--</div>-->
+          </div>
+        </div>
+        </form>
+    </mat-card-content>
+
     <mat-card-actions>
       <button mat-button routerLink="/board-create" routerLinkActive="active">글쓰기</button>
       <button mat-button value="Submit" (click)="onModify()">수정하기</button>

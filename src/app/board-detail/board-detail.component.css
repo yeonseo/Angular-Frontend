@@ -1,3 +1,30 @@
 mat-card-content pre {
   white-space:pre-line;
 }
+
+.comment-box {
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.comment-box mat-divider {
+  position: relative;
+  width: 80%;
+  padding: 5px 10%;
+}
+
+.comment-date {
+  font-size: 0.7rem;
+  color: gray;
+}
+
+.comment-box mat-form-field {
+  margin-top: 20px;
+  width: 80%;
+}
+
+.commnet-button {
+  position: relative;
+  margin-left: 23px;
+  border: 1px solid lightgray;
+}
