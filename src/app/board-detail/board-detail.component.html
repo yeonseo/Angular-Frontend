@@ -30,7 +30,7 @@
             <mat-form-field appearance="fill">
               <mat-label>내용을 입력해주세요.</mat-label>
               <textarea matInput id="comment" name="comment" class="form-control"
-                        formControlName="comment" required></textarea>
+                        formControlName="comment" (click)="userLoginCheck()" required></textarea>
             </mat-form-field>
             <button mat-button class="commnet-button" value="submit" [disabled]="commentForm.invalid">댓글달기</button>
             <!--<div *ngIf="comment.invalid && (comment.dirty || comment.touched)"-->

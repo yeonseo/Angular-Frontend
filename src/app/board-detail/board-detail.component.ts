@@ -91,11 +91,24 @@ export class BoardDetailComponent extends CommonComponent {
       },
       response => {
         // console.log('POST call in error', response);
+        if (confirm('로그인 하시면 댓글을 쓸 수 있습니다. 로그인하시겠습니까?')) {
+          this.router.navigateByUrl('/login');
+        }
       },
       () => {
         // console.log('The POST observable is now completed.');
       }
     );
+  }
+
+  userLoginCheck(): void {
+    if (!this.authService.currentUserValue) {
+      if (confirm('로그인 하시면 댓글을 쓸 수 있습니다. 로그인하시겠습니까?')) {
+        this.router.navigateByUrl('/login');
+      } else {
+        document.getElementById('comment').setAttribute('readonly', 'readonly');
+      }
+    }
   }
 
   submitUserCheck(): boolean {
