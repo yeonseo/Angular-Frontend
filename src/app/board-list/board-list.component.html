@@ -34,7 +34,10 @@
   <!--</mat-card>-->
 <!--</div>-->
 
-
+<mat-card class="search-box">
+  <input matInput id="search" name="search" [(ngModel)]="searchKeyword" required>
+  <button mat-button (click)="onSearch()">검색</button>
+</mat-card>
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">

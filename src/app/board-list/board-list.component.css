@@ -1,3 +1,17 @@
+.search-box input {
+  width:80%;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  height: 1.5rem;
+  margin: 0 10px 4px 10px;
+  padding: 3px;
+}
+
+.search-box input:focus {
+  border: 1px solid lightskyblue;
+  box-shadow: 0px 0px 5px #72add0;
+}
+
 table {
   width: 670px;
 }

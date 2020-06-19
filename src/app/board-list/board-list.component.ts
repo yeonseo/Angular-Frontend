@@ -16,6 +16,7 @@ export class BoardListComponent extends CommonComponent {
   CLASS_NAME = 'BoardListComponent';
 
   text = '자유게시판';
+  searchKeyword = '';
   datas = [];
   selectedBoard: Board;
 
@@ -51,6 +52,15 @@ export class BoardListComponent extends CommonComponent {
 
   onSelect(board: Board): void {
     this.selectedBoard = board;
+  }
+
+  onSearch() {
+    this.dataService.sendGetRequest('freeboards/?search=' + this.searchKeyword).subscribe((data: any[]) => {
+      this.datas = data;
+      // console.log(data);
+      this.dataSource = new MatTableDataSource<Board>(data);
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   onBoardCreate() {
