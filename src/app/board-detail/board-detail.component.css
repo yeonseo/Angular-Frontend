@@ -1,5 +1,6 @@
-mat-card-content pre {
+mat-card-content pre, .comment-box mat-card-subtitle {
   white-space:pre-line;
+  word-break: break-all;
 }
 
 .comment-box {
