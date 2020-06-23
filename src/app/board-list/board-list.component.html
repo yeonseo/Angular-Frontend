@@ -1,41 +1,25 @@
 <h1>{{ text }}</h1>
 
-<!--<ul class="boards">-->
-  <!--<li *ngFor="let board of boards"-->
-      <!--[class.selected]="board === selectedBoard"-->
-      <!--(click)="onSelect(board)"><a routerLink="/board-detail/{{board.id}}">{{ board.title }} | {{ board.username }} {{ board.created }}  {{ board.views }}</a>-->
-  <!--</li>-->
-<!--</ul>-->
-
-<!--<div style="padding: 13px;">-->
-  <!--<mat-card>-->
-    <!--<mat-card-actions>-->
-      <!--<button mat-button routerLink="/board-create" routerLinkActive="active">글쓰기</button>-->
-    <!--</mat-card-actions>-->
-  <!--</mat-card>-->
-
-  <!--<mat-spinner *ngIf="datas.length === 0"></mat-spinner>-->
-  <!--<mat-card *ngFor="let board of datas" [class.selected]="board === selectedBoard"-->
-            <!--(click)="onSelect(board)" routerLink="/board-detail/{{board.id}}" style="margin-top:10px;">-->
-    <!--<mat-card-header>-->
-      <!--<mat-card-title>{{board.title}}</mat-card-title>-->
-      <!--<mat-card-subtitle>작성자 ID : {{board.username}} | {{board.created | date:'yyyy년 MM월 dd일 HH:mm '}}-->
-      <!--</mat-card-subtitle>-->
-    <!--</mat-card-header>-->
-    <!--<mat-card-content>-->
-      <!--<p>-->
-        <!--{{board.content}}-->
-      <!--</p>-->
-      <!--<img *ngIf="board.files !== null " style="height:100%; width: 100%;" src="{{ board.files }}" />-->
-    <!--</mat-card-content>-->
-    <!--<mat-card-actions>-->
-      <!--<button mat-button routerLink="/board-detail/{{board.id}}">상세 보기</button>-->
-    <!--</mat-card-actions>-->
-  <!--</mat-card>-->
-<!--</div>-->
+<mat-card class="search-box">
+  <button mat-button [matMenuTriggerFor]="menu">검색옵션</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>전체</button>
+    <button mat-menu-item>글쓴이</button>
+    <button mat-menu-item>제목</button>
+    <button mat-menu-item>내용</button>
+  </mat-menu>
+  <input matInput id="search" name="search" [(ngModel)]="searchKeyword" required>
+  <button mat-button (click)="onSearch()">검색</button>
+</mat-card>
 
 <mat-card class="search-box">
-  <input matInput id="search" name="search" [(ngModel)]="searchKeyword" required>
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+  </mat-form-field>
+
   <button mat-button (click)="onSearch()">검색</button>
 </mat-card>
 

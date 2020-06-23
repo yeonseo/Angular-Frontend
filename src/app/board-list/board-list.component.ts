@@ -23,6 +23,8 @@ export class BoardListComponent extends CommonComponent {
   displayedColumns: string[] = ['id', 'title', 'username', 'created', 'views'];
   dataSource;
 
+  startDate = new Date();
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   // 필요시에 아래처럼 추가
