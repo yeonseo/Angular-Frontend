@@ -43,6 +43,11 @@ export class UserJoinComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.authService.currentUserValue) {
+      this.router.navigate(['/']);
+      return;
+    }
+
     this.joinForm = new FormGroup({
         'username': new FormControl(this.joinUser.username, [
           Validators.required,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {DataService} from '../service/data.service';
 import {AuthenticationService} from '../service/authentication.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-login',
@@ -11,9 +12,15 @@ import {AuthenticationService} from '../service/authentication.service';
 export class UserLoginComponent implements OnInit {
   incorrectUser = false;
 
-  constructor(private authService: AuthenticationService, private dataService: DataService) { }
+  constructor(private authService: AuthenticationService,
+              private dataService: DataService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    if (this.authService.currentUserValue) {
+      this.router.navigate(['/']);
+      return;
+    }
   }
 
   onSubmit(f: NgForm): void {
