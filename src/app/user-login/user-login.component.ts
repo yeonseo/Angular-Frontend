@@ -14,13 +14,15 @@ export class UserLoginComponent implements OnInit {
 
   constructor(private authService: AuthenticationService,
               private dataService: DataService,
-              private router: Router) { }
+              private router: Router) {
 
-  ngOnInit(): void {
     if (this.authService.currentUserValue) {
       this.router.navigate(['/']);
       return;
     }
+  }
+
+  ngOnInit(): void {
   }
 
   onSubmit(f: NgForm): void {

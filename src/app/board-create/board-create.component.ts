@@ -33,6 +33,12 @@ export class BoardCreateComponent extends CommonComponent {
               authService: AuthenticationService,
               appInjector: Injector) {
     super(route, router, dataService, authService, appInjector);
+
+    if (!this.authService.currentUserValue) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     if (route.snapshot.params['page-num'] !== '' || route.snapshot.params['page-num'] !== null) {
       this.pageNum = route.snapshot.params['page-num'];
     }
