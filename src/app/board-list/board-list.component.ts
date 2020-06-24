@@ -23,19 +23,27 @@ export class BoardListComponent extends CommonComponent {
   displayedColumns: string[] = ['id', 'title', 'username', 'created', 'views'];
   dataSource;
 
+  selectedOptionValue;
+  searchOptions = [
+    {value: "option_total", viewValue: "전체"},
+    {value: "option_user", viewValue: "글쓴이"},
+    {value: "option_title", viewValue: "제목"},
+    {value: "option_content", viewValue: "내용"},
+  ];
+
   startDate = new Date();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   // 필요시에 아래처럼 추가
-  // constructor(route: ActivatedRoute,
-  //             router: Router,
-  //             dataService: DataService,
-  //             authService: AuthenticationService,
-  //             appInjector: Injector) {
-  //   super(route, router, dataService, authService, appInjector);
-  //   console.log('addConstructor');
-  // }
+  constructor(route: ActivatedRoute,
+              router: Router,
+              dataService: DataService,
+              authService: AuthenticationService,
+              appInjector: Injector) {
+    super(route, router, dataService, authService, appInjector);
+    console.log('addConstructor');
+  }
 
   ngOnInit() {
     /* we defined a products variable and called
@@ -57,6 +65,10 @@ export class BoardListComponent extends CommonComponent {
   }
 
   onSearch() {
+    switch (this.selectedOptionValue) {
+      case "option_user" : break;
+    }
+
     this.dataService.sendGetRequest('freeboards/?search=' + this.searchKeyword).subscribe((data: any[]) => {
       this.datas = data;
       // console.log(data);
